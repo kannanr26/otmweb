@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+
+a, a:visited {
+    color: #fff !important;
+}
+
+ a:hover, a:active {
+    color: #fff !important;
+}
+
+ a {
+    color: #fff !important;
+}
+.bgcolor{
+    background: linear-gradient(#ffffff,#005580);
+  }
+
+  .headertextcolor{
+    color:#fff;
+  }
+  .textgoballogo{
+          font-size: 1.5rem;
+  }
+  .textfont{
+    font-family:'Courier New', Courier, monospace;
+    font-style: italic; 
+  }
+  .textgobal{
+    font-size: 1.2rem;
+  }

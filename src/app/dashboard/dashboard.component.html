@@ -1,0 +1,15 @@
+<div class="container-fluid bgcolor" style="height: 450px;">
+  <div class="text-center">
+    <h1>
+      
+      <span >Dash Board Page!</span>
+    </h1>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    
+  <a [routerLink]="['dashboard/edit']">edit</a>
+  <label>{{ isLogin }}</label>
+  <button class="dropdown-item" (click)="logout()" translate> <i class="fas fa-sign-out-alt"></i>Logout</button>
+  <router-outlet></router-outlet>
+  </div>
+</div>
+
