@@ -1,85 +1,64 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router, CanActivate } from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Credential } from './model/Credential';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { RequestOptions } from '../../../node_modules/@angular/http';
+//import 'rxjs/add/operator/do';
+export interface login {
+  // Customize received credentials here
+  username: string;
+  password: string;
+}
+
 const httpOptions = {
   headers: new HttpHeaders({
+    'Accept':  'application/json',
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
   })
 };
 
-export interface Credentials {
-  // Customize received credentials here
-  username: string;
-  admmin?:boolean;
-  token: string;
-}
-
-export interface LoginContext {
-  username: string;
-  password: string;
-  remember?: boolean;
-}
-
-const credentialsKey = 'credentials';
-
-
+const credentialKey = 'credentials';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  extractData(arg0: any): any {
+    console.log(arg0);
+  }
 
-  private _credentials: Credentials | null;
-  private baseUrl='http:\\localhost:8080\\otmrest';
+  private _credential: Credential | null;
+  private baseUrl = 'http:\\localhost:8080\\otmrest';
 
   constructor(private http: HttpClient, private router: Router) {
-    const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
+    const savedCredentials = sessionStorage.getItem(credentialKey) || localStorage.getItem(credentialKey);
     if (savedCredentials) {
-      this._credentials = JSON.parse(savedCredentials);
+      this._credential = JSON.parse(savedCredentials);
     }
   }
-login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
 
-/*
+  login(credential: Credential) {
+    //context.remember=false;
+    console.info('inside login Auth S');
+    console.info(credential);
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions();
+    // options.headers["Content-Type"] = "application/json";
+    debugger;
 
-addHero (hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
-   .pipe(
-     catchError(this.handleError('addHero', hero))
-   );
- }
-  getHeroes (): Observable<Hero[]> {
- return this.http.get<Hero[]>(this.heroesUrl)
-   .pipe(
-     catchError(this.handleError('getHeroes', []))
-   );
- }
-*/
-
-
-this
-.http
-.post(`${this.baseUrl}/login`, context)
-  .subscribe(res => 
-    console.log('Done')
-    //this.setCredentials(data, context.remember);
-     //return of(data);
-
-  );
-
-
-
-    const data = {
-      username: context.username,
-      token: '123456'
-    };
-    context.remember=false;
-    this.setCredentials(data, context.remember);
-    return of(data);
+    console.info(JSON.stringify(credential));
+    return this.http.post('http://localhost:8081/otmrest/login', JSON.stringify(credential), httpOptions);
+    // return this.http.post<Credential>('http://localhost:8081/otmrest/login',
+    //   credential, httpOptions)
+    //   .subscribe(credential => {
+        // console.log(credential);
+    //     this.setCredentials(credential, false);
+    //     console.log('Login Succes full');
+    //   }, error => {
+    //     console.log(error);
+    //   });
   }
 
   /**
@@ -97,15 +76,15 @@ this
    * @return {boolean} True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    return !!this._credentials;
+    return !!this._credential;
   }
 
   /**
    * Gets the user credentials.
    * @return {Credentials} The user credentials or null if the user is not authenticated.
    */
-  get credentials(): Credentials | null {
-    return this._credentials;
+  get credentials(): Credential | null {
+    return this._credential;
   }
 
   /**
@@ -115,15 +94,15 @@ this
    * @param {Credentials=} credentials The user credentials.
    * @param {boolean=} remember True to remember credentials across sessions.
    */
-  private setCredentials(credentials?: Credentials, remember?: boolean) {
-    this._credentials = credentials || null;
+  private setCredentials(credentials?: Credential, remember?: boolean) {
+    this._credential = credentials || null;
 
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
-      storage.setItem(credentialsKey, JSON.stringify(credentials));
+      storage.setItem(credentialKey, JSON.stringify(credentials));
     } else {
-      sessionStorage.removeItem(credentialsKey);
-      localStorage.removeItem(credentialsKey);
+      sessionStorage.removeItem(credentialKey);
+      localStorage.removeItem(credentialKey);
     }
 
   }
