@@ -6,12 +6,6 @@ import { Credential } from './model/Credential';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { RequestOptions } from '../../../node_modules/@angular/http';
-//import 'rxjs/add/operator/do';
-export interface login {
-  // Customize received credentials here
-  username: string;
-  password: string;
-}
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,48 +13,45 @@ const httpOptions = {
     'Content-Type':  'application/json',
   })
 };
-
+const baseURL='http://localhost:8081/otmrest/login';
 const credentialKey = 'credentials';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  extractData(arg0: any): any {
-    console.log(arg0);
-  }
-
+  
   private _credential: Credential | null;
-  private baseUrl = 'http:\\localhost:8080\\otmrest';
-
+  public isLogin :boolean ;
+  
   constructor(private http: HttpClient, private router: Router) {
     const savedCredentials = sessionStorage.getItem(credentialKey) || localStorage.getItem(credentialKey);
     if (savedCredentials) {
+      this.isLogin= false;
       this._credential = JSON.parse(savedCredentials);
     }
   }
 
   login(credential: Credential) {
-    //context.remember=false;
-    console.info('inside login Auth S');
-    console.info(credential);
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions();
-    // options.headers["Content-Type"] = "application/json";
-    debugger;
-
-    console.info(JSON.stringify(credential));
-    return this.http.post('http://localhost:8081/otmrest/login', JSON.stringify(credential), httpOptions);
-    // return this.http.post<Credential>('http://localhost:8081/otmrest/login',
-    //   credential, httpOptions)
-    //   .subscribe(credential => {
-        // console.log(credential);
-    //     this.setCredentials(credential, false);
-    //     console.log('Login Succes full');
-    //   }, error => {
-    //     console.log(error);
-    //   });
-  }
-
+  console.info('inside login Client service ::::: Json :: '+JSON.stringify(credential));
+    return this.http.post<Credential>(baseURL,
+    JSON.stringify(credential), httpOptions)
+       .subscribe(credential => {
+         console.log('After return::::::'+ credential);
+         this.isLogin= true;
+         this.setCredentials(credential, false);
+         console.log('Login Succes full');
+       }, error => {
+        this.isLogin= false;
+         if(error.status==401 || error.status==402 || error.status==403){
+          console.info(400);
+       
+         } else if(error.status==500 || error.status==501 || error.status==502){
+         }
+         console.info(error);
+         this.setCredentials(null, false);
+      
+       });
+      }
   /**
    * Logs out the user and clear credentials.
    * @return {Observable<boolean>} True if the user was logged out successfully.
@@ -76,7 +67,7 @@ export class AuthenticationService {
    * @return {boolean} True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    return !!this._credential;
+    return (!!this.credentials && this.isLogin);
   }
 
   /**
@@ -94,13 +85,14 @@ export class AuthenticationService {
    * @param {Credentials=} credentials The user credentials.
    * @param {boolean=} remember True to remember credentials across sessions.
    */
-  private setCredentials(credentials?: Credential, remember?: boolean) {
+  public setCredentials(credentials?: Credential, remember?: boolean) {
     this._credential = credentials || null;
 
-    if (credentials) {
+    if (this._credential !=null && this.isLogin) {
       const storage = remember ? localStorage : sessionStorage;
-      storage.setItem(credentialKey, JSON.stringify(credentials));
+      storage.setItem(credentialKey, JSON.stringify(this._credential));
     } else {
+      this.isLogin=false;
       sessionStorage.removeItem(credentialKey);
       localStorage.removeItem(credentialKey);
     }

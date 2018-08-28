@@ -27,13 +27,24 @@
                 </label>
                 <label class="d-block">
                     <input type="email" class="form-control" formControlName="email" autocomplete="email"
-                           [placeholder]="'Email' "/>
+                           [placeholder]="'Email'" (blur)="onSplit($event.target.value)" />
                     <span hidden translate>Emailname</span>
                     <small [hidden]="registrationForm.controls.email.valid || registrationForm.controls.email.untouched"
                            class="text-danger" translate>
-                           email is required
+                           EMail is required
                     </small>
                   </label>
+
+                  <label class="d-block" class="form-control">
+                  <input type="radio"  formControlName="gender" autocomplete="gender"
+                  [placeholder]="'Gender'">Male
+                  <input type="radio" formControlName="gender" autocomplete="gender"
+                  [placeholder]="'Gender' " >Female
+                  <small [hidden]="registrationForm.controls.gender.valid || registrationForm.controls.gender.untouched"
+                  class="text-danger" translate>
+                  Gender is required
+           </small>
+                    </label>
             <label class="d-block">
             <input type="text" class="form-control" formControlName="userid" autocomplete="userid"
                    [placeholder]="'Userid'"/>
@@ -50,33 +61,6 @@
             <small [hidden]="registrationForm.controls.password.valid || registrationForm.controls.password.untouched"
                    class="text-danger" tanslate>
               Password is required
-            </small>
-          </label>
-          <label class="d-block">
-            <input type="password" class="form-control" formControlName="rpassword" autocomplete="current-password"
-                   [placeholder]="'Repeat Password' " required/>
-            <span hidden translate>Repeat Password</span>
-            <small [hidden]="registrationForm.controls.rpassword.valid || registrationForm.controls.rpassword.untouched"
-                   class="text-danger" trtrationanslate>
-              Password is required
-            </small>
-          </label>
-          <label class="d-block">
-            <input type="text" class="form-control" formControlName="rname" autocomplete="refference name"
-                   [placeholder]="'Relation Name'"/>
-            <span hidden translate>Relation Name</span>
-            <small [hidden]="registrationForm.controls.rname.valid || registrationForm.controls.rname.untouched"
-                   class="text-danger" translate>
-              Refference name is required
-            </small>
-          </label>
-          <label class="d-block">
-            <input type="text" class="form-control" formControlName="relationship" autocomplete="relationship"
-                   [placeholder]="'Relationship'"/>
-            <span hidden translate>Relationship</span>
-            <small [hidden]="registrationForm.controls.relationship.valid || registrationForm.controls.relationship.untouched"
-                   class="text-danger" translate>
-              Refference relationship is required
             </small>
           </label>
         </div>

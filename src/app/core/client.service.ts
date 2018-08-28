@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthenticationService} from './authentication.service';
 import { Customer } from './model/customer';
-
+import { Credential } from './model/Credential';
 //import 'rxjs/add/operator/do';
 
 const httpOptions = {
@@ -17,10 +18,10 @@ const httpOptions = {
 
 export class ClientService {
    url:string='http://localhost:8081';
-  constructor(private http:HttpClient ) { }
+  constructor(private http:HttpClient,private authenticationService: AuthenticationService ) { }
 
-  login(customer :Customer){
-   return  this.http.post(this.url+'\\login',customer);
+  login(credential :Credential){
+     this.authenticationService.login(credential);
   }
   registration (customer :Customer){
     return  this.http.post(this.url+'\\postcustomer',customer,httpOptions);

@@ -1,6 +1,6 @@
 export class Credential {
     // Customize received credentials here
-    username: string;
+    userId: string;
     password: string;
     }
   

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import {Credential} from '../core/model/Credential';
 import {AuthenticationService} from '../core/authentication.service';
+import {ClientService} from '../core/client.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private clientService: ClientService) {
     this.createForm();
   }
 
@@ -26,34 +28,17 @@ export class LoginComponent implements OnInit {
   login() {
     this.isLoading = true;
     console.info('inside login component');
-    console.info(this.loginForm.value);
-    this.authenticationService.login(this.loginForm.value)
-    this.router.navigate(['/dashboard'], { replaceUrl: true });
-  }
-/*
-  login() {
-    this.isLoading = true;
-    console.debug('inside login component');
-    //this.credentials =new Credentials(this.loginForm.controls.username,.this.loginForm.controls.password);
-    this.authenticationService.login(this.loginForm.value)
-
-      .pipe(finalize(() => {
-        this.loginForm.markAsPristine();
-        this.isLoading = false;
-      }))
-      .subscribe(credentials => {
-        //log.debug(`${credentials.username} successfully logged in`);
-        this.authenticationService.setCredentials(credentials, false);
-        this.router.navigate(['/dashboard'], { replaceUrl: true });
-      }, error => {
-        this.error = error;
-      });
-      
-  }
-*/
+    this.clientService.login(this.loginForm.value);
+    if(this.authenticationService.isAuthenticated && this.authenticationService.isLogin)
+      this.router.navigate(['/dashboard'], { replaceUrl: true });
+      else{
+        
+        this.router.navigate(['/login'], { replaceUrl: true });
+      }
+  };
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      userId: ['', Validators.required],
       password: ['', Validators.required]    });
   }
 

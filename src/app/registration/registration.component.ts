@@ -28,8 +28,8 @@ export class RegistrationComponent implements OnInit {
     this.isLoading = true;
     //let msg :Observable;
    // msg = 
-    this.clientService.registration(this.registrationForm.value);
-     /*.pipe(finalize(() => {
+    this.clientService.registration(this.registrationForm.value)
+     .pipe(finalize(() => {
       this.registrationForm.markAsPristine();
       this.isLoading = false;
     }))
@@ -38,19 +38,18 @@ export class RegistrationComponent implements OnInit {
       this.router.navigate(['/login'], { replaceUrl: true });
     }, error => {
       this.error = error;
-    });*/
+    });
   }
   private createForm() {
     this.registrationForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      /*gender: ['', Validators.required],*/
+   //   gender: ['', Validators.required],
       userid: ['', Validators.required],
       password: ['', Validators.required],
-      rpassword: ['', Validators.required],
-      rname: ['', Validators.required],
-      relationship: ['', Validators.required]
      });
   }
+
+ // onSplit ()
 }
