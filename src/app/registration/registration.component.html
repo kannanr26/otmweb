@@ -1,68 +1,97 @@
 <div class="container bgcolor">
   <div class="card col-md-6 mt-3 mx-auto">
     <div class="card-body">
-    
+
       <form (ngSubmit)="registration()" [formGroup]="registrationForm" novalidate>
         <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
           <!--Username or password incorrect.-->
         </div>
         <div class="form-group">
-            <label class="d-block">
-                <input type="text" class="form-control" formControlName="firstname" autocomplete="firstname"
-                       [placeholder]="'FirstName'"/>
-                <span hidden translate>Firstname</span>
-                <small [hidden]="registrationForm.controls.firstname.valid || registrationForm.controls.firstname.untouched"
-                       class="text-danger" translate>
-                  Firstname is required
-                </small>
-              </label>
-              <label class="d-block">
-                  <input type="text" class="form-control" formControlName="lastname" autocomplete="lastname"
-                         [placeholder]="'LastName'"/>
-                  <span hidden translate>Lastname</span>
-                  <small [hidden]="registrationForm.controls.lastname.valid || registrationForm.controls.lastname.untouched"
-                         class="text-danger" translate>
-                         Lastname is required
-                  </small>
-                </label>
-                <label class="d-block">
-                    <input type="email" class="form-control" formControlName="email" autocomplete="email"
-                           [placeholder]="'Email'" (blur)="onSplit($event.target.value)" />
-                    <span hidden translate>Emailname</span>
-                    <small [hidden]="registrationForm.controls.email.valid || registrationForm.controls.email.untouched"
-                           class="text-danger" translate>
-                           EMail is required
-                    </small>
-                  </label>
-
-                  <label class="d-block" class="form-control">
-                  <input type="radio"  formControlName="gender" autocomplete="gender"
-                  [placeholder]="'Gender'">Male
-                  <input type="radio" formControlName="gender" autocomplete="gender"
-                  [placeholder]="'Gender' " >Female
-                  <small [hidden]="registrationForm.controls.gender.valid || registrationForm.controls.gender.untouched"
-                  class="text-danger" translate>
-                  Gender is required
-           </small>
-                    </label>
-            <label class="d-block">
-            <input type="text" class="form-control" formControlName="userid" autocomplete="userid"
-                   [placeholder]="'Userid'"/>
-            <span hidden translate>UserId</span>
-            <small [hidden]="registrationForm.controls.userid.valid || registrationForm.controls.userid.untouched"
-                   class="text-danger" translate>
-              UserId is required
+          <label class="d-block">Registration For</label>
+          <label class="d-block">
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="firstName" [placeholder]="'FirstName'" />
+            <span hidden translate>Firstname</span>
+            <small [hidden]="registrationForm.controls.firstName.valid || registrationForm.controls.firstName.untouched"
+              class="text-danger" translate>
+              Firstname is required
             </small>
           </label>
           <label class="d-block">
+            <input type="text" class="form-control" formControlName="lastName" autocomplete="lastName" [placeholder]="'LastName'" />
+            <span hidden translate>Lastname</span>
+            <small [hidden]="registrationForm.controls.lastName.valid || registrationForm.controls.lastName.untouched"
+              class="text-danger" translate>
+              Lastname is required
+            </small>
+          </label>
+          <label class="d-block">
+
+            <select class="form-control" formControlName="gender" (change)="selectedGender($event.target.value)">
+              <option value=""> Select Gender </option>
+              <option *ngFor="let gender1 of genders" value={{gender1}}>
+                {{gender1}}
+              </option>
+            </select>
+            <small [hidden]="registrationForm.controls.gender.valid || registrationForm.controls.gender.untouched"
+              class="text-danger" translate>
+              Gender is required
+            </small>
+          </label>
+          <label class="d-block">Contact Details</label>
+          <label class="d-block">
+            <input type="email" class="form-control" formControlName="email" autocomplete="email" [placeholder]="'Contact Email'"
+              (blur)="onSplitUserId ($event.target.value)" />
+            <span hidden translate>Emailname</span>
+            <small [hidden]="registrationForm.controls.email.valid || registrationForm.controls.email.untouched" class="text-danger"
+              translate>
+              EMail is required
+            </small>
+          </label>
+          <label class="d-block">Login Details</label>
+          <label class="d-block">
             <input type="password" class="form-control" formControlName="password" autocomplete="current-password"
-                   [placeholder]="'Password'" required/>
+              [placeholder]="'Password'" required />
             <span hidden translate>Password</span>
             <small [hidden]="registrationForm.controls.password.valid || registrationForm.controls.password.untouched"
-                   class="text-danger" tanslate>
+              class="text-danger" tanslate>
               Password is required
             </small>
           </label>
+
+          <label class="d-block">
+            <input type="text" disabled class="form-control" formControlName="userId" autocomplete="userId"
+              [placeholder]="'Userid'" />
+            <span hidden translate>UserId</span>
+            <small [hidden]="registrationForm.controls.userId.valid || registrationForm.controls.userId.untouched"
+              class="text-danger" translate>
+              UserId is required
+            </small>
+          </label>
+          <label class="d-block">Refference Details</label>
+          <label class="d-block">  
+              <input type="text" class="form-control" formControlName="rname" autocomplete="refference name"    
+                     [placeholder]="'Relation Name'"/>   
+              <span hidden translate>Relation Name</span>    
+              <small [hidden]="registrationForm.controls.rname.valid || registrationForm.controls.rname.untouched"    
+                     class="text-danger" translate>  
+   
+                Refference name is required  
+   
+              </small>  
+            </label>    
+            <label class="d-block"> 
+
+              <input type="text" class="form-control" formControlName="relationship" autocomplete="relationship"    
+                     [placeholder]="'Relationship'"/> 
+
+              <span hidden translate>Relationship</span> 
+              <small [hidden]="registrationForm.controls.relationship.valid || registrationForm.controls.relationship.untouched" 
+                     class="text-danger" translate> 
+                Refference relationship is required 
+              </small> 
+            </label> 
+
+
         </div>
         <button class="btn btn-primary w-100" type="submit" [disabled]="registrationForm.invalid || isLoading">
           <i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>

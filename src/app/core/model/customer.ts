@@ -11,7 +11,7 @@ export class Customer {
     private _gender?: string,
     private _email?: string,
     private _refference?: Refference,
-    // public token?: string ,
+   
   ) {}
 
   get id() {

@@ -1,4 +1,4 @@
-enum Creatingfor {
+export enum Creatingfor {
     SON = "Son",
     DAUGHTER="Daughter",
     SELF= "Myself",

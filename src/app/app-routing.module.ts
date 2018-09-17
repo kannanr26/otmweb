@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent} from './dashboard/edit/edit.component';
-
+import {MyprofileComponent} from './dashboard/myprofile/myprofile.component';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
 import {RegistrationComponent} from './registration/registration.component';
@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'dashboard', component: DashboardComponent,
   children:[
+    { path: 'dashboard/myprofile', component: MyprofileComponent},
     { path: 'dashboard/edit', component: EditComponent},
   ]
 },

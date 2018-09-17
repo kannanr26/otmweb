@@ -17,13 +17,20 @@ const httpOptions = {
 })
 
 export class ClientService {
-   url:string='http://localhost:8081';
+   url:string='http://localhost:8081/otmrest';
   constructor(private http:HttpClient,private authenticationService: AuthenticationService ) { }
 
   login(credential :Credential){
      this.authenticationService.login(credential);
   }
   registration (customer :Customer){
+    console.info(customer);
     return  this.http.post(this.url+'\\postcustomer',customer,httpOptions);
+   }
+
+   getCustomer(){
+     //this.http.options.
+   let credential=this.authenticationService.credentials;
+    return  this.http.get(this.url+'\\customershow\\'+credential.id,httpOptions);
    }
   }

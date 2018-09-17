@@ -4,13 +4,14 @@ import { AuthenticationService } from '../core/authentication.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'], 
-  providers:[AuthenticationService]
+ // providers:[AuthenticationService]
 
 })
 export class HomeComponent implements OnInit {
-  isLogin: boolean;
+  isLogin: boolean= false;
   constructor(private authenticationService :AuthenticationService) {
-    if(authenticationService.isAuthenticated){
+    debugger
+    if(this.authenticationService.isAuthenticated()){
       this.isLogin=true;
     }else
       this.isLogin=false;

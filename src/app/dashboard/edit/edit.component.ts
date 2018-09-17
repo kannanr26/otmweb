@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthenticationService } from '../../core/authentication.service';
+import { ClientService } from '../../core/client.service';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authenticationService :AuthenticationService,private clientServies :ClientService) { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() 
+    {
+      /* this.router.params.subscribe(params => {
+          this.authenticationService.editGame(params['id']).subscribe(res => {
+              this.game = res;
+          });
+      });
+    }
+  }*/
+    }
 }

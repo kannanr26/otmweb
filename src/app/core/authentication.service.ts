@@ -36,20 +36,21 @@ export class AuthenticationService {
     return this.http.post<Credential>(baseURL,
     JSON.stringify(credential), httpOptions)
        .subscribe(credential => {
+         
          console.log('After return::::::'+ credential);
          this.isLogin= true;
          this.setCredentials(credential, false);
          console.log('Login Succes full');
        }, error => {
         this.isLogin= false;
-         if(error.status==401 || error.status==402 || error.status==403){
+         if(error.status===401 || error.status===402 || error.status===403){
           console.info(400);
        
-         } else if(error.status==500 || error.status==501 || error.status==502){
-         }
+         } else if(error.status===500 || error.status===501 || error.status===502){
+         
          console.info(error);
          this.setCredentials(null, false);
-      
+         }
        });
       }
   /**
@@ -67,6 +68,10 @@ export class AuthenticationService {
    * @return {boolean} True if the user is authenticated.
    */
   isAuthenticated(): boolean {
+    
+    console.info("IS AUTHEN cre :::"+!!this.credentials +"  login :"+ this.isLogin);
+    console.info("IS AUTHEN cre ::: ::"+(!!this.credentials && this.isLogin));
+    debugger
     return (!!this.credentials && this.isLogin);
   }
 
