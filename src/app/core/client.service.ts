@@ -28,6 +28,17 @@ export class ClientService {
     return  this.http.post(this.url+'\\postcustomer',customer,httpOptions);
    }
 
+   getProfile (){
+   
+    let credential=this.authenticationService.credentials;
+    return  this.http.get(this.url+'\\getProfile\\'+credential.id,httpOptions);
+   }
+   updateProfile(customer :Customer){
+    var id=this.authenticationService.credentials.id
+
+    return  this.http.post(this.url+'\\editprofile\\'+id,customer,httpOptions);
+   }
+
    getCustomer(){
      //this.http.options.
    let credential=this.authenticationService.credentials;

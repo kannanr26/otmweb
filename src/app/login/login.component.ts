@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+   }
   login() {
     this.isLoading = true;
     this.authenticationService.login(this.loginForm.value);
@@ -34,8 +36,8 @@ export class LoginComponent implements OnInit {
       this.credentials = this.authenticationService.credentials;
       
        console.info('inside login component'+this.credentials);
-
-      if (this.credentials.isProfileFilled)
+      
+      if (!this.credentials.isProfileFilled)
         this.router.navigate(['/dashboard'], { replaceUrl: true });
       else
         this.router.navigate(['/dashboard'], { replaceUrl: true });

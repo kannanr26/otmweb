@@ -4,6 +4,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import {HttpModule} from '@angular/http';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {CoreModule} from './core/core.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { MyprofileComponent } from './dashboard/myprofile/myprofile.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,8 @@ import { MyprofileComponent } from './dashboard/myprofile/myprofile.component';
     ReactiveFormsModule,
     HttpModule,
     AngularFontAwesomeModule,
+    NgbPaginationModule, 
+    NgbAlertModule,
     CoreModule
   ],
   providers: [],

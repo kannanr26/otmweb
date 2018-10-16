@@ -5,6 +5,7 @@
       <form (ngSubmit)="registration()" [formGroup]="registrationForm" novalidate>
         <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
           <!--Username or password incorrect.-->
+          
         </div>
         <div class="form-group">
           <label class="d-block">Registration For</label>
@@ -25,7 +26,32 @@
             </small>
           </label>
           <label class="d-block">
+              <div class="form-control">
+                <label class="radio-inline"> <input formControlName="gender" type="radio"value="Male" name="gender"  /> Male </label>
+                <label class="radio-inline"> <input formControlName="gender" type="radio"value="Female" name="gender"  /> Female </label>
 
+              </div>
+              <span hidden translate>Gender</span>
+              <small [hidden]="registrationForm.controls.gender.valid ||  registrationForm.controls.gender.untouched"
+                class="text-danger" translate>
+                Gender is required
+              </small> 
+            </label>
+            
+          <label class="d-block">
+              <select class="form-control" formControlName="religion" (change)="selectedReligion($event.target.value)">
+                <option value=""> Select Religion </option>
+                <option *ngFor="let religion1 of religions" value={{religion1}}>
+                  {{religion1}}
+                </option>
+              </select>
+              <small [hidden]="registrationForm.controls.religion.valid || registrationForm.controls.religion.untouched"
+                class="text-danger" translate>
+                Religion is required
+              </small>
+            </label>
+          <!--
+          <label class="d-block">
             <select class="form-control" formControlName="gender" (change)="selectedGender($event.target.value)">
               <option value=""> Select Gender </option>
               <option *ngFor="let gender1 of genders" value={{gender1}}>
@@ -37,7 +63,16 @@
               Gender is required
             </small>
           </label>
-          <label class="d-block">Contact Details</label>
+
+-->          <label class="d-block">Contact Details</label>
+<label class="d-block">
+  <input type="text" class="form-control" formControlName="contactName" autocomplete="contactName" [placeholder]="'Name of Contact'" />
+  <span hidden translate> Contact person name </span>
+  <small [hidden]="registrationForm.controls.contactName.valid || registrationForm.controls.contactName.untouched"
+    class="text-danger" translate>
+    Contact Person name is required
+  </small>
+</label>
           <label class="d-block">
             <input type="email" class="form-control" formControlName="email" autocomplete="email" [placeholder]="'Contact Email'"
               (blur)="onSplitUserId ($event.target.value)" />
@@ -67,7 +102,7 @@
               UserId is required
             </small>
           </label>
-          <label class="d-block">Refference Details</label>
+         <!-- <label class="d-block">Refference Details</label>
           <label class="d-block">  
               <input type="text" class="form-control" formControlName="rname" autocomplete="refference name"    
                      [placeholder]="'Relation Name'"/>   
@@ -91,7 +126,7 @@
               </small> 
             </label> 
 
-
+          -->
         </div>
         <button class="btn btn-primary w-100" type="submit" [disabled]="registrationForm.invalid || isLoading">
           <i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>

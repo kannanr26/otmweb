@@ -1,0 +1,304 @@
+<div class="container bgcolor">
+  <div class="card col-md-6 mt-3 mx-auto">
+    <div class="card-body">
+        <form  (ngSubmit)="onUpdate()" #customerForm="ngForm">
+        <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
+          <!--Username or password incorrect.-->
+          
+        </div>
+        <div class="form-group">
+          <label class="d-block">My Profile </label>
+          <label class="d-block" for="First Name">First Name
+            <input type="text" class="form-control" id="firstName" required 
+            [(ngModel)]="customer.firstName" name="firstName" #firstName="ngModel"  [placeholder]="'FirstName'"/>
+            <span hidden translate>Firstname</span>
+            <small [hidden]="firstName.valid || firstName.pristine"
+              class="text-danger" translate>
+              Firstname is required
+            </small>
+          </label>
+
+          <label class="d-block" for="Last Name">Last Name
+            <input type="text" class="form-control" id="lastName" required 
+            [(ngModel)]="customer.lastName" name="lastName" #lastName="ngModel">
+            <span hidden translate>Lastname</span>
+            <small [hidden]="lastName.valid || lastName.pristine"
+              class="text-danger" translate>
+              Lastname is required
+            </small>
+          </label>
+
+          <label class="d-block" for="gender">Gender {{customer.gender}}
+            <div class="form-control">
+              <label class="radio-inline"> <input type="radio"value="Male" name="gender" [(ngModel)]="customer.gender" #gender=ngModel /> Male </label>
+              <label class="radio-inline"> <input type="radio"value="Female" name="gender" [(ngModel)]="customer.gender" #gender=ngModel /> Female </label>
+            </div>
+            <span hidden translate>Gender</span>
+            <small [hidden]="gender.valid || gender.pristine"
+              class="text-danger" translate>
+              Gender is required
+            </small>
+          </label>
+
+          
+        <label class="d-block">
+          
+            <select class="form-control"  (change)="selectedReligion($event.target.value)" >
+              <option value=""> Select Religion </option>
+              <option selected="customer.religion" *ngFor="let religion1 of religions" value="={{religion1}}" id="religion" >
+                {{religion1}}
+              </option>
+            </select>
+            <!--
+             <small [hidden]="religion.valid || religion.pristine"
+              class="text-danger" translate> 
+              Religion is required
+            </small> -->
+          </label>
+
+          <label class="d-block">
+            <select class="form-control"  (change)="selectedYear($event.target.value)">
+              <option value=""> Select Birth Year </option>
+              <option *ngFor="let year1 of years" value={{year1}}> 
+                {{year1}}
+              </option>
+            </select>
+    <!--        <small [hidden]="dobYear.valid || dobYear.pristine"
+              class="text-danger" translate>
+              DOB Year is required
+            </small> -->
+          </label>
+
+          <label class="d-block">
+              <input type="text" class="form-control" id="education" required 
+              [(ngModel)]="customer.education" name="education" #education="ngModel"  [placeholder]="'Education'"/> 
+            <small [hidden]="education.valid || education.pristine"
+              class="text-danger" translate>
+              Education is required
+            </small>
+          </label>
+      
+          
+          <label class="d-block">
+            <select class="form-control"  (change)="selectedFoodHabit($event.target.value)">
+              <option value=""> Select foodHabit </option>
+              <option *ngFor="let foodHabit1 of foodHabbits" value={{foodHabit1}} > 
+                {{foodHabit1}}
+              </option>
+            </select>
+            
+            <!--
+            <small [hidden]="foodHabit.valid || foodHabit.pristine"
+              class="text-danger" translate>
+              Food Habit is required
+            </small>-->
+          </label>
+
+          
+          <label class="d-block">
+              <input type="text" class="form-control" id="facebook" required 
+              [(ngModel)]="customer.faceBook" name="faceBook" #faceBook="ngModel"  [placeholder]="'Facebook Profile Link'"/> 
+            <small [hidden]="faceBook.valid || faceBook.pristine"
+              class="text-danger" translate>
+              Facebook profile is required
+            </small>
+          </label>
+
+          <label class="d-block">
+            <select class="form-control"  (change)="selectedWMReligions($event.target.value)">
+              <option value=""> Select Willingness to marry other religion </option>
+              <option *ngFor="let religion1 of religions" value={{religion1}} >
+                {{religion1}}
+              </option>
+            </select>
+    <!--        <small [hidden]="wmReligion.valid || wmReligion.pristine"
+              class="text-danger" translate>
+              Willingness to marry other Religion is required
+            </small>-->
+          </label>
+
+          <label class="d-block" for="relocate">Willing to relocation
+            <div class="form-control">
+              <label class="radio-inline"> <input type="radio"value="true" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> Yes </label>
+              <label class="radio-inline"> <input type="radio"value="false" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> No </label>
+
+            </div>
+            <span hidden translate>Relocation</span>
+            <small [hidden]="relocation.valid || relocation.pristine"
+              class="text-danger" translate>
+              Relocation is required
+            </small>
+          </label>
+
+          <label class="d-block">Residence and Work place Details</label>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>City</td>
+                    <td>Country</td>
+                    <td>Details</td>
+                    
+                </tr>
+                </thead>
+              
+                <tbody >
+                    <tr>Residencal Details</tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" id="residencalCity" required 
+                            [(ngModel)]="customer.residencalCity" name="residencalcity" #residencalCity="ngModel"  [placeholder]="'City of residence '"/>
+                            <span hidden translate>City</span>
+                            <small [hidden]="residencalCity.valid || residencalCity.pristine"
+                              class="text-danger" translate>
+                              City of residence  is required
+                            </small> 
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="residencalcountry" required 
+                            [(ngModel)]="customer.residencalCountry" name="residencalCountry" #residencalCountry="ngModel"  [placeholder]="'Country of residence'"/>
+                            <span hidden translate>Country</span>
+                            <small [hidden]="residencalCountry.valid || residencalCountry.pristine"
+                              class="text-danger" translate>
+                              Country is residence required
+                            </small>
+                        </td>
+                        <td>
+                          <textarea type="textarea" class="form-control" id="residencalDetails" required 
+                          [(ngModel)]="customer.residencalDetails" name="residencalDetails" #residencalDetails="ngModel"> 
+                          </textarea>
+                          <span hidden translate>Residencal Details</span>
+                          <small [hidden]="residencalDetails.valid || residencalDetails.pristine"
+                            class="text-danger" translate>
+                            Residence  Details is required
+                          </small>
+                        </td>
+                    </tr>
+                    <tr>Work Place Details</tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" id="workPlaceCity" required 
+                            [(ngModel)]="customer.workPlaceCity" name="workPlaceCity" #workPlaceCity="ngModel"  [placeholder]="'City of work place '"/>
+                            <span hidden translate>City</span>
+                            <small [hidden]="workPlaceCity.valid || workPlaceCity.pristine"
+                              class="text-danger" translate>
+                              City of work place  is required
+                            </small> 
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="workPlacecountry" required 
+                            [(ngModel)]="customer.workPlaceCountry" name="workPlaceCountry" #workPlaceCountry="ngModel"  [placeholder]="'Country of work place'"/>
+                            <span hidden translate>Country</span>
+                            <small [hidden]="workPlaceCountry.valid || workPlaceCountry.pristine"
+                              class="text-danger" translate>
+                              Country is work place required
+                            </small>
+                        </td>
+                        <td>
+                          <textarea type="textarea" class="form-control" id="workPlaceDetails" required 
+                          [(ngModel)]="customer.workPlaceDetails" name="workPlaceDetails" #workPlaceDetails="ngModel"> 
+                          </textarea>
+                          <span hidden translate>Residencal Details</span>
+                          <small [hidden]="workPlaceDetails.valid || workPlaceDetails.pristine"
+                            class="text-danger" translate>
+                            work  Details is required
+                          </small>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+
+          <label class="d-block" for="wishToSay">Wish To Say
+            <textarea type="text" class="form-control" id="wishToSay" required 
+            [(ngModel)]="customer.wishToSay" name="wishToSay" #wishToSay="ngModel"></textarea>
+            <span hidden translate>Wish to say</span>
+            <small [hidden]="wishToSay.valid || wishToSay.pristine"
+              class="text-danger" translate>
+              Wish to say is required
+            </small>
+          </label>
+
+          <label class="d-block">Login Details </label>
+          <label class="d-block" for="userId">UserId
+              <input type="text" class="form-control" id="userId" required  disabled
+              [(ngModel)]="customer.userId" name="userId" #userId="ngModel">
+              <span hidden translate>UserId</span>
+              
+            </label>
+            <label class="d-block">Contact Details </label>
+            <label class="d-block" for="contactName">Name
+              <input type="text" class="form-control" id="contactName" required
+              [(ngModel)]="customer.contactName" name="contactName" #userId="ngModel">
+              <span hidden translate>Contact Name</span>
+              <!-- <small [hidden]="contactName.valid || contactName.pristine"
+                class="text-danger" translate>
+                Contact Name is required
+              </small> -->
+            </label>
+          <label class="d-block" for="email">EMail
+              <input type="text" class="form-control" id="userId" required  disabled
+              [(ngModel)]="customer.email" name="email" #email="ngModel">
+              <span hidden translate>EMail</span>
+              <!--<small [hidden]="email.valid || email.pristine"
+                class="text-danger" translate>
+                Email is required
+              </small> -->
+            </label>
+<!--
+            <label class="d-block">Refference Details </label>
+
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                  <td>Name</td>
+                  <td>Relationship</td>
+                  <td>Details</td>
+                  
+              </tr>
+              </thead>
+            
+              <tbody >
+                  <tr *ngFor="let reff of customer.refference" >
+                      <td>
+                        <input type="text" class="form-control" id="reff" required 
+                        [(ngModel)]="reff.name" name="reffname" #reffname="ngModel">
+                        <span hidden translate>Refference Name</span>
+                        <small [hidden]="reffname.valid || reffname.pristine"
+                          class="text-danger" translate>
+                          Refference Name is required
+                        </small>
+                      </td>
+                      <td>
+                        
+                        <input type="text" class="form-control" id="reff" required 
+                        [(ngModel)]="reff.relationship" name="reffrelationship" #reffrelationship="ngModel">
+                        <span hidden translate>Refference Relationship</span>
+                        <small [hidden]="reffrelationship.valid || reffrelationship.pristine"
+                          class="text-danger" translate>
+                          Refference relationship is required
+                        </small>
+                      </td>
+                      <td>
+                        <textarea type="textarea" class="form-control" id="reff" required 
+                        [(ngModel)]="reff.details" name="reffdetails" #reffdetails="ngModel"> 
+                        </textarea>
+                        <span hidden translate>Refference Details</span>
+                        <small [hidden]="reffdetails.valid || reffdetails.pristine"
+                          class="text-danger" translate>
+                          Refference Details is required
+                        </small>
+
+                      </td>
+                  </tr>
+              </tbody>
+            </table>
+          -->
+    </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="!customerForm.form.valid">
+            <i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>  Update
+          </button>
+    
+        
+      </form>
+    </div>
+  </div>
+</div>

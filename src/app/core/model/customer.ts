@@ -8,10 +8,31 @@ export class Customer {
     private _confirmPassword?: string,
     private _firstName?: string,
     private _lastName?: string,
+    private _contactName?: string,
     private _gender?: string,
+    private _religion?: string,
     private _email?: string,
     private _refference?: Refference,
-   
+    private _dobYear?: number,
+    private _wmReligion?: string,
+    private _education?: string,
+    private _relocation?: boolean,
+    private _foodHabit?: string,
+    private _wishToSay?: string,
+    private _profileFilled?: boolean,
+
+    private _residencalDetails?: string,
+    private _residencalCity?: string,
+    private _residencalCountry?: string,
+    private _residencal?: string,
+    
+    private _workPlaceDetails?: string,
+    private _workPlaceCity?: string,
+    private _workPlaceCountry?: string,
+    private _workPlace?: string,
+    private _faceBook?: string,
+    
+
   ) {}
 
   get id() {
@@ -47,6 +68,13 @@ export class Customer {
     return this._lastName;
   }
 
+  set contactName(value) {
+    this._contactName = value;
+  }
+
+  get contactName() {
+    return this._contactName;
+  }
   set gender(value) {
     this._gender = value;
   }
@@ -59,6 +87,18 @@ export class Customer {
   get email() {
     return this._email;
   }
+  get dobYear() {
+    return this._dobYear;
+  }
+  set dobYear(value) {
+    this._dobYear = value;
+  }
+  set religion(value) {
+    this._religion = value;
+  }
+  get religion() {
+    return this._religion;
+  }
   
   get refference() {
     return this._refference;
@@ -66,4 +106,115 @@ export class Customer {
   set refference(value: Refference) {
     this._refference = value;
   }
+  get wmReligion() {
+    return this._wmReligion;
+  }
+  set wmReligion(value) {
+    this._wmReligion = value;
+  }
+  
+  get education() {
+    return this._education;
+  }
+  set education(value) {
+    this._education = value;
+  }
+  
+  get foodHabit() {
+    return this._foodHabit;
+  }
+  set foodHabit(value) {
+    this._foodHabit = value;
+  }
+  get relocation() {
+    return this._relocation;
+  }
+  set relocation(value: boolean) {
+    this._relocation = value;
+  }
+
+  get profileFilled() {
+    return this._profileFilled
+  }
+  set profileFilled(value: boolean) {
+    this._profileFilled = value;
+  }
+
+  get wishToSay() {
+    return this._wishToSay;
+  }
+  set wishToSay(value) {
+    this._wishToSay = value;
+  }
+  
+  get faceBook() {
+    return this._faceBook;
+  }
+  set faceBook(value) {
+    this._faceBook = value;
+  }
+
+  get residencalDetails() {
+    return this._residencalDetails;
+  }
+  set residencalDetails(value) {
+    this._residencalDetails = value;
+  }
+
+  get residencalCountry() {
+    return this._residencalCountry;
+  }
+  set residencalCountry(value) {
+    this._residencalCountry = value;
+  }
+  
+  get residencalCity() {
+    return this._residencalCity;
+  }
+  set residencalCity(value) {
+    this._residencalCity = value;
+  }
+
+  get ResidenceDetails() {
+    return this.residencalCity+"\,"+this.residencalCountry+"\,"+this.residencalDetails;
+  }
+  set ResidenceDetails(value) {
+   var values = value.split('\,');
+   this.residencalCity=values[0];
+   this.residencalCountry=values[1];
+   this.residencalDetails=values[2];
+      
+  }
+
+  get worklocationDetails() {
+    return this.workPlaceCity+"\,"+this.workPlaceCountry+"\,"+this.residencalDetails;
+  }
+  set worklocationDetails(value) {
+    var values = value.split('\,');
+   this.workPlaceCity=values[0];
+   this.workPlaceCountry=values[1];
+   this.workPlaceDetails=values[2];
+  }
+  
+  get workPlaceDetails() {
+    return this._workPlaceDetails;
+  }
+  set workPlaceDetails(value) {
+    this._workPlaceDetails = value;
+  }
+  
+  get workPlaceCountry() {
+    return this._workPlaceCountry;
+  }
+  set workPlaceCountry(value) {
+    this._workPlaceCountry = value;
+  }
+  
+  get workPlaceCity() {
+    return this._workPlaceCity;
+  }
+  set workPlaceCity(value) {
+    this._workPlaceCity = value;
+  }
+  
 }

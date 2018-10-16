@@ -17,7 +17,8 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isLoading = false;
   genders = ["Male", "Female"];
-  //selGender: Array<string>;
+  religions = ["Hindu","Muslim","Christianity","Others"];
+      //selGender: Array<string>;
 
   /*
   createFor :Creatingfor; 
@@ -30,6 +31,7 @@ export class RegistrationComponent implements OnInit {
     this.createForm();
   }
   ngOnInit() {
+    this.registrationForm.controls['religion'].setValue("Hindu");
   }
 
 
@@ -47,6 +49,7 @@ export class RegistrationComponent implements OnInit {
    */
   registration() {
     this.isLoading = true;
+    console.info(this.registrationForm.value);
     this.clientService.registration(this.registrationForm.value)
       .pipe(finalize(() => {
         this.registrationForm.markAsPristine();
@@ -55,7 +58,8 @@ export class RegistrationComponent implements OnInit {
       .subscribe(credentials => {
         this.router.navigate(['/login'], { replaceUrl: true });
       }, error => {
-        this.error = error;
+
+        this.error = "Enter the correct credentials";
       });
   }
   private createForm() {
@@ -64,10 +68,12 @@ export class RegistrationComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       gender: ['', Validators.required],
+      religion:['',Validators.required],
       userId: ['', Validators.required],
       password: ['', Validators.required],
-      rname: ['', Validators.required],
-      relationship: ['', Validators.required],
+      contactName:['',Validators.required],
+      /*rname: ['', Validators.required],
+      relationship: ['', Validators.required],*/
     });
   }
 
@@ -80,6 +86,9 @@ export class RegistrationComponent implements OnInit {
     }else{
       this.registrationForm.controls['email'].setErrors({'incorrect': true});
     }
+  }
+  selectedReligions(value: String) {
+    this.registrationForm.controls['religion'].setValue(value);
   }
   selectedGender(value: String) {
     this.registrationForm.controls['gender'].setValue(value);

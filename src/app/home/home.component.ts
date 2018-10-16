@@ -10,7 +10,7 @@ import { AuthenticationService } from '../core/authentication.service';
 export class HomeComponent implements OnInit {
   isLogin: boolean= false;
   constructor(private authenticationService :AuthenticationService) {
-    debugger
+
     if(this.authenticationService.isAuthenticated()){
       this.isLogin=true;
     }else

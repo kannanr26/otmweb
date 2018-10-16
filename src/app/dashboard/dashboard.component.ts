@@ -12,13 +12,23 @@ import {ClientService} from '../core/client.service'
 export class DashboardComponent implements OnInit {
   isLoading: boolean;
   isLogin: boolean;
+  isAdmin: boolean;
   customerList :Customer[];
 
   constructor(private authenticationService :AuthenticationService,private clientServies :ClientService, private router: Router) { 
+    
     if(authenticationService.isAuthenticated){
       this.isLogin=true;
-    }else
+      if(authenticationService.credentials.admin){
+        this.isAdmin=true;
+      }
+      else
+      this.isAdmin=false;
+            
+    }else{
+      this.router.navigate(['/login'], { replaceUrl: true });
       this.isLogin=false;
+    }
   }
 
   ngOnInit() {
@@ -30,6 +40,7 @@ export class DashboardComponent implements OnInit {
       this.customerList = data;
   });
   this.isLoading=false;
+  console.info(this.customerList);
   }
 
   logout() {

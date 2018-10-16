@@ -8,6 +8,7 @@
     
   <a [routerLink]="['dashboard/edit']">edit</a>
   <label>{{ isLogin }}</label>
+  <label>{{ isAdmin }}</label>
   <button class="dropdown-item" (click)="logout()" translate> <i class="fas fa-sign-out-alt"></i>Logout</button>
 
   <table class="table table-hover">
@@ -20,12 +21,13 @@
     </tr>
     </thead>
   
-    <tbody>
-        <tr *ngFor="let game of games">
-            <td>{{ game.name }}</td>
-            <td>{{ game.price }}</td>
-            <td><a [routerLink]="['/edit', game._id]" class="btn btn-primary">Edit</a></td>
-            <td><button (click)="deleteGame(game._id)"  class="btn btn-danger">Delete</button></td>
+    <tbody > 
+        <tr *ngFor="let customer of customerList" >
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.age }}</td>
+            <td>{{ customer.religion }}</td>
+            <td *ngIf="isAdmin"> <a [routerLink]="['/edit', customer.id]" class="btn btn-primary">Edit</a></td>
+            <td *ngIf="isAdmin"> <button (click)="deleteCustomer(customer.id)"  class="btn btn-danger">Delete</button></td>
         </tr>
     </tbody>
   </table>

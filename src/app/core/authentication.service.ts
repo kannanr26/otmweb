@@ -26,8 +26,11 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {
     const savedCredentials = sessionStorage.getItem(credentialKey) || localStorage.getItem(credentialKey);
     if (savedCredentials) {
-      this.isLogin= false;
+      this.isLogin= true;
       this._credential = JSON.parse(savedCredentials);
+    }else{
+      this.isLogin= false;
+      this._credential = null;
     }
   }
 
@@ -71,7 +74,7 @@ export class AuthenticationService {
     
     console.info("IS AUTHEN cre :::"+!!this.credentials +"  login :"+ this.isLogin);
     console.info("IS AUTHEN cre ::: ::"+(!!this.credentials && this.isLogin));
-    debugger
+    
     return (!!this.credentials && this.isLogin);
   }
 
