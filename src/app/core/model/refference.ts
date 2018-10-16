@@ -2,7 +2,9 @@ export class Refference {
   constructor(
     private _id?: number,
     private _name?: string,
-    private _relationship?: string) {}
+    private _relationship?: string,
+    private _details?: string) {}
+    
   get id() {
     return this._id;
   }
@@ -20,5 +22,12 @@ export class Refference {
   }
   get relationship() {
     return this._relationship;
+  }
+  
+  set details(value) {
+    this._details = value;
+  }
+  get details() {
+    return this._details;
   }
 }
