@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
     this.createForm();
   }
   ngOnInit() {
-    this.registrationForm.controls['religion'].setValue("Hindu");
+   // this.registrationForm.controls['religion'].setValue("Hindu");
   }
 
 
@@ -88,6 +88,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
   selectedReligions(value: String) {
+    console.info("Religion::" +value);
     this.registrationForm.controls['religion'].setValue(value);
   }
   selectedGender(value: String) {

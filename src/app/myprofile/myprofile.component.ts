@@ -50,7 +50,7 @@ export class MyprofileComponent implements OnInit {
 
     this.isLoading = true;
     console.info(this.customer);
-
+debugger
     this.clientServies.updateProfile(this.customer)
     .pipe(finalize(() => {
      this.isLoading = false;
@@ -64,18 +64,18 @@ export class MyprofileComponent implements OnInit {
 
   }
   
-  selectedReligion(value: String) {
-    this.customer.religion===value;
+  selectedReligion(value: string) {
+    this.customer.religion=value;
   }
   
-  selectedWMReligions(value: String) {
-    this.customer.wmReligion===value;
+  selectedWMReligions(value: string) {
+    this.customer.wmReligion=value;
   }
   selectedYear(value: number) {
-    this.customer.dobYear===value;
+    this.customer.dobYear=value;
   }
-  selectedFoodHabit(value: String) {
-    this.customer.foodHabit===value;
+  selectedFoodHabit(value: string) {
+    this.customer.foodHabit=value;
 
   }
   logout() {

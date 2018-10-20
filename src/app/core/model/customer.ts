@@ -9,6 +9,7 @@ export class Customer {
     private _firstName?: string,
     private _lastName?: string,
     private _contactName?: string,
+    private _contactRelation?: string,
     private _gender?: string,
     private _religion?: string,
     private _email?: string,
@@ -16,7 +17,7 @@ export class Customer {
     private _dobYear?: number,
     private _wmReligion?: string,
     private _education?: string,
-    private _relocation?: boolean,
+    private _relocation?: string,
     private _foodHabit?: string,
     private _wishToSay?: string,
     private _profileFilled?: boolean,
@@ -24,12 +25,12 @@ export class Customer {
     private _residencalDetails?: string,
     private _residencalCity?: string,
     private _residencalCountry?: string,
-    private _residencal?: string,
     
+    private _residenceDetails?: string,
     private _workPlaceDetails?: string,
     private _workPlaceCity?: string,
     private _workPlaceCountry?: string,
-    private _workPlace?: string,
+    private _worklocationDetails?: string,
     private _faceBook?: string,
     
 
@@ -74,6 +75,13 @@ export class Customer {
 
   get contactName() {
     return this._contactName;
+  }
+  set contactRelation(value) {
+    this._contactRelation = value;
+  }
+
+  get contactRelation() {
+    return this._contactRelation;
   }
   set gender(value) {
     this._gender = value;
@@ -129,7 +137,7 @@ export class Customer {
   get relocation() {
     return this._relocation;
   }
-  set relocation(value: boolean) {
+  set relocation(value: string) {
     this._relocation = value;
   }
 
@@ -174,28 +182,41 @@ export class Customer {
   set residencalCity(value) {
     this._residencalCity = value;
   }
-
-  get ResidenceDetails() {
-    return this.residencalCity+"\,"+this.residencalCountry+"\,"+this.residencalDetails;
+/*
+  get residenceDetails() {
+    //this._residenceDetails=this.residencalCity+"\,"+this.residencalCountry+"\,"+this.residencalDetails;
+    return this._residenceDetails;
   }
-  set ResidenceDetails(value) {
+  set residenceDetails(value) {
+    if(value!=null){
+    this._residenceDetails=value;
    var values = value.split('\,');
    this.residencalCity=values[0];
    this.residencalCountry=values[1];
    this.residencalDetails=values[2];
+    }else{
+      this._residenceDetails=this.residencalCity+"\,"+this.residencalCountry+"\,"+this.residencalDetails;
+    }
       
   }
 
   get worklocationDetails() {
-    return this.workPlaceCity+"\,"+this.workPlaceCountry+"\,"+this.residencalDetails;
+    return this._worklocationDetails;
   }
   set worklocationDetails(value) {
+
+    if(value!=null){
+    this._worklocationDetails=value;
     var values = value.split('\,');
    this.workPlaceCity=values[0];
    this.workPlaceCountry=values[1];
    this.workPlaceDetails=values[2];
+  }else{
+    this._worklocationDetails=this.workPlaceCity+"\,"+this.workPlaceCountry+"\,"+this.residencalDetails;
+    
   }
-  
+  }
+  */
   get workPlaceDetails() {
     return this._workPlaceDetails;
   }

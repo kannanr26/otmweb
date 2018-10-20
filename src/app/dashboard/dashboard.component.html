@@ -1,22 +1,25 @@
-<div class="container-fluid bgcolor" style="height: 450px;">
+<div class="container bgcolor" style="height: 450px;">
   <div class="text-center">
     <h1>
       
       <span >Dash Board Page!</span>
     </h1>
     <app-loader [isLoading]="isLoading"></app-loader>
-    
+  <!--  
   <a [routerLink]="['dashboard/edit']">edit</a>
-  <label>{{ isLogin }}</label>
-  <label>{{ isAdmin }}</label>
-  <button class="dropdown-item" (click)="logout()" translate> <i class="fas fa-sign-out-alt"></i>Logout</button>
-
-  <table class="table table-hover">
+    <button class="dropdown-item" (click)="logout()" translate> <i class="fas fa-sign-out-alt"></i>Logout</button>
+  -->
+  <table align class="table table-hover">
     <thead>
     <tr>
         <td>Name</td>
-        <td>Age</td>
+        <td>Date Of Birth Year </td>
+        <td>Education</td>
         <td>Religion</td>
+        <td>Food Habbit</td>
+        <td>Relocation</td>
+
+        
         <td colspan="2">Actions</td>
     </tr>
     </thead>
@@ -24,8 +27,12 @@
     <tbody > 
         <tr *ngFor="let customer of customerList" >
             <td>{{ customer.name }}</td>
-            <td>{{ customer.age }}</td>
+            <td>{{ customer.dobYear }}</td>
+            <td>{{ customer.education }}</td>
             <td>{{ customer.religion }}</td>
+            <td>{{ customer.foodHabit }}</td>
+            <td>{{ customer.relocation }}</td>
+            <td disabled=""> <a [routerLink]="['/view', customer.id]" class="btn btn-primary">Edit</a></td>
             <td *ngIf="isAdmin"> <a [routerLink]="['/edit', customer.id]" class="btn btn-primary">Edit</a></td>
             <td *ngIf="isAdmin"> <button (click)="deleteCustomer(customer.id)"  class="btn btn-danger">Delete</button></td>
         </tr>

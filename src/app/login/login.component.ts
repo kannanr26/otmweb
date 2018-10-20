@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
        console.info('inside login component'+this.credentials);
       
       if (!this.credentials.isProfileFilled)
-        this.router.navigate(['/dashboard'], { replaceUrl: true });
+        this.router.navigate(['/myprofile'], { replaceUrl: true });
       else
         this.router.navigate(['/dashboard'], { replaceUrl: true });
     }

@@ -42,10 +42,10 @@
 
           
         <label class="d-block">
-          
+          {{customer.religion}}
             <select class="form-control"  (change)="selectedReligion($event.target.value)" >
               <option value=""> Select Religion </option>
-              <option selected="customer.religion" *ngFor="let religion1 of religions" value="={{religion1}}" id="religion" >
+              <option selected={{customer.religion}} *ngFor="let religion1 of religions" value="{{customer.religion}}" id="religion" >
                 {{religion1}}
               </option>
             </select>
@@ -119,8 +119,8 @@
 
           <label class="d-block" for="relocate">Willing to relocation
             <div class="form-control">
-              <label class="radio-inline"> <input type="radio"value="true" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> Yes </label>
-              <label class="radio-inline"> <input type="radio"value="false" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> No </label>
+              <label class="radio-inline"> <input type="radio" value="1" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> Yes </label>
+              <label class="radio-inline"> <input type="radio" value="0" name="relocation" [(ngModel)]="customer.relocation" #relocation=ngModel /> No </label>
 
             </div>
             <span hidden translate>Relocation</span>
@@ -227,12 +227,21 @@
             <label class="d-block">Contact Details </label>
             <label class="d-block" for="contactName">Name
               <input type="text" class="form-control" id="contactName" required
-              [(ngModel)]="customer.contactName" name="contactName" #userId="ngModel">
+              [(ngModel)]="customer.contactName" name="contactName" #contactName="ngModel">
               <span hidden translate>Contact Name</span>
               <!-- <small [hidden]="contactName.valid || contactName.pristine"
                 class="text-danger" translate>
                 Contact Name is required
               </small> -->
+            </label>
+            <label class="d-block" for="contactRelation">Relationship
+              <input type="text" class="form-control" id="contactRelation" required
+              [(ngModel)]="customer.contactRelation" name="contactRelation" #contactRelation="ngModel">
+              <span hidden translate>Contact Name</span>
+               <small [hidden]="contactRelation.valid || contactRelation.pristine"
+                class="text-danger" translate>
+                Contact relation is required
+              </small>
             </label>
           <label class="d-block" for="email">EMail
               <input type="text" class="form-control" id="userId" required  disabled
@@ -290,8 +299,8 @@
                       </td>
                   </tr>
               </tbody>
-            </table>
-          -->
+            </table> -->
+          
     </div>
         <button type="submit" class="btn btn-primary w-100" [disabled]="!customerForm.form.valid">
             <i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>  Update
